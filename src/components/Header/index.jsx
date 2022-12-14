@@ -1,5 +1,6 @@
 import React from 'react'
 import Logo from '../../assets/logo-dio.png'
+import Perfil from '../../assets/perfil.jpg'
 import { Button } from '../Button'
 
 import { 
@@ -14,22 +15,29 @@ import {
     Wrapper
 } from './styles'
 
-const Header = () => {
+const Header = ({autenticado}) => {
     return(
         <Wrapper>
             <Container>
                 <Row>
                     <img src={Logo} alt="Logo" />
-                    <BuscarInputContainer>
+                    {autenticado ? (<>
+                        <BuscarInputContainer>
                         <Input placeholder='Buscar...' />
-                    </BuscarInputContainer>
-                    <Menu>Live Code</Menu>
-                    <Menu>Global</Menu>
+                        </BuscarInputContainer>
+                        <Menu>Live Code</Menu>
+                        <Menu>Global</Menu>
+                    </>) : null}
+                    
                 </Row>
                 <Row>
-                    <MenuRight href="#" >Home</MenuRight>
-                    <Button title="Entrar"></Button>
-                    <Button title="Cadastrar"></Button>
+                    {autenticado ?(
+                        <UserPicture src={Perfil} />
+                    ) : (<>
+                        <MenuRight href="#" >Home</MenuRight>
+                        <Button title="Entrar"></Button>
+                        <Button title="Cadastrar"></Button>
+                    </>)}
                 </Row>
             </Container>
         </Wrapper>
