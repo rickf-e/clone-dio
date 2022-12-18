@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback } from 'react'
 
 const Teste = () => {
     const [name, setName] = useState('Paulo')
@@ -8,13 +8,13 @@ const Teste = () => {
     // useCallBack = referência de função
 
     const handleChangeName = useCallback(() => {
-        setName(prev => prev == 'Paulo' ? 'Henrique' : 'Paulo')
+        setName(prev => prev === 'Paulo' ? 'Henrique' : 'Paulo')
     }, [])
 
     const handleChangeAge = useCallback(() => {
         const newAge = 10 * age
         console.log('Age atual =>', age, newAge)
-        setAge(prev => prev == 26 ? 32 : 26)
+        setAge(prev => prev === 26 ? 32 : 26)
     }, [age])
 
     return(
