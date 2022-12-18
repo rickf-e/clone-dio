@@ -14,10 +14,11 @@ export const ButtonContainer = styled.button`
         min-width: 167px;
         height: 33px;
 
-        background: #E4105D;
+        background: #E4104C;
 
         &:hover{
-            opacity: 0.6;
+            background-color: #E4105D;
+            cursor: pointer;
         }
 
         &::after {

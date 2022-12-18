@@ -11,6 +11,8 @@ import { Header } from '../../components/Header'
 
 import { Input } from '../../components/Input'
 
+import { api } from '../../services/api'
+
 import { 
     Container,
     Title,
@@ -31,15 +33,23 @@ const schema = yup.object({
 const Login = () => {
     const navigate = useNavigate()
 
-    const { control, handleSubmit, formState: { errors, isValid } } = useForm({
+    const { control, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
         mode: 'onChange'
     });
-    const onSubmit = data => {console.log(data)}
-    
-    const handleClickSignIn = () => {
-        navigate('/feed')
+    const onSubmit = async formData => {
+        try{
+            const { data } = await api.get(`users?email=${formData.email}&senha=${formData.password}`)
+            if(data.length === 1){
+                navigate('/feed')
+            }else{
+                alert('Email ou senha inválido')
+            }
+        }catch{
+            alert('Houve algum erro')
+        }
     }
+    
     return(
         <>
             <Header />

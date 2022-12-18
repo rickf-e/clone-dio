@@ -45,7 +45,14 @@ export const RecuperarSenha = styled.p`
     font-size: 14px;
     line-height: 19px;
 
-    color: #E5E044;
+    color: #575AAD;
+    opacity: .7;
+
+    &:hover{
+        color: #7377FF;
+        cursor: pointer;
+        opacity: 1;
+    }
 `
 export const CriarText = styled.p`
     font-family: 'Open Sans';
@@ -54,7 +61,14 @@ export const CriarText = styled.p`
     font-size: 14px;
     line-height: 19px;
 
-    color: #E23DD7;
+    color: #238c8c;
+    opacity: .7;
+
+    &:hover{
+        color: #30c9c9;
+        cursor: pointer;
+        opacity: 1;
+    }
 `
 export const Wrapper = styled.div`
     max-width: 300px;
