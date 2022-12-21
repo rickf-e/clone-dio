@@ -1,5 +1,6 @@
 import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
+import PersonIcon from '@mui/icons-material/Person';
 import { useNavigate } from 'react-router-dom'
 
 import { useForm } from "react-hook-form"
@@ -11,15 +12,13 @@ import { Header } from '../../components/Header'
 
 import { Input } from '../../components/Input'
 
-import { api } from '../../services/api'
-
 import { 
     Container,
     Title,
     TitleLogin,
     SubtitleLogin,
-    RecuperarSenha,
-    CriarText,
+    TermosDeUso,
+    CriarConta,
     Wrapper,
     Column,
     Row
@@ -31,26 +30,13 @@ const schema = yup.object({
     password: yup.number().min(3, 'Mínimo de 3 caracteres').required('Campo Obrigatório'),
 }).required();
 
-const Login = () => {
-    const navigate = useNavigate()
+const Cadastro = () => {
+    
 
     const { control, handleSubmit, formState: { errors } } = useForm<IFormData>({
         resolver: yupResolver(schema),
         mode: 'onChange'
     });
-    const onSubmit = async (formData: IFormData) => {
-        try{
-            const { data } = await api.get(`users?email=${formData.email}&senha=${formData.password}`)
-            if(data.length === 1){
-                navigate('/feed')
-            }else{
-                alert('Email ou senha inválido')
-            }
-        }catch{
-            alert('Houve algum erro')
-        }
-    }
-    
     return(
         <>
             <Header />
@@ -62,16 +48,17 @@ const Login = () => {
                 </Column>
                 <Column>
                     <Wrapper>
-                        <TitleLogin>Faça seu cadastro</TitleLogin>
-                        <SubtitleLogin>Faça seu login e make the change.</SubtitleLogin>
-                        <form onSubmit={handleSubmit(onSubmit)}>
-                            <Input name="email" errorMessage={errors?.email?.message } control={control} placeholder="E-mail" leftIcon={<EmailIcon style={{ color: "#AE37FF" }} />} />                            
-                            <Input name="password" errorMessage={errors?.password?.message } control={control} placeholder="Senha" type="password" leftIcon={<LockIcon style={{ color: "#AE37FF" }} />} />
-                            <Button title="Entrar" variant="secondary" type="submit" />
+                        <TitleLogin>Comece agora grátis</TitleLogin>
+                        <SubtitleLogin>Crie sua conta e make the change.</SubtitleLogin>
+                        <form>
+                            <Input name="text" control={control} placeholder="Nome Completo" leftIcon={<PersonIcon style={{ color: "#AE37FF" }} />} /> 
+                            <Input name="email" control={control} placeholder="E-mail" leftIcon={<EmailIcon style={{ color: "#AE37FF" }} />} />                            
+                            <Input name="password" control={control} placeholder="Senha" type="password" leftIcon={<LockIcon style={{ color: "#AE37FF" }} />} />
+                            <Button title="Criar minha conta" variant="secondary" type="submit" />
                         </form>
                         <Row>
-                            <RecuperarSenha>Esqueci minha senha</RecuperarSenha>
-                            <CriarText>Criar uma conta</CriarText>
+                            <TermosDeUso>Ao clicar em "criar minha conta grátis", declaro que aceito as Políticas de Privacidade e os Termos de Uso da DIO.</TermosDeUso>
+                            <CriarConta>Já tenho uma conta. <span>Fazer Login</span></CriarConta>
                         </Row>
                     </Wrapper>
                 </Column>
@@ -80,4 +67,4 @@ const Login = () => {
     )
 }
 
-export {Login}
+export {Cadastro}
